@@ -1,0 +1,36 @@
+{
+  "name": "@regimentor/mof-build-scripts",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "regimentor <regimentor@yandex.ru>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/build-scripts.js",
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test:watch_directory": "bin/build-scripts --watch-dir=__tests__/src --config-file=__tests__/build.config.js",
+    "test:just_run": "bin/build-scripts --config-file=__tests__/build.config.js",
+    "build": "rollup -c && chmod +x bin/build-scripts"
+  },
+  "dependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "minimist": "^1.2.0",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-cli": "^0.1.5",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  }
+}

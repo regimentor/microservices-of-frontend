@@ -1,0 +1,117 @@
+#!/usr/bin/env node
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var fs = _interopDefault(require('fs'));
+var minimist = _interopDefault(require('minimist'));
+var path = _interopDefault(require('path'));
+var rollup = _interopDefault(require('rollup'));
+var babel = _interopDefault(require('rollup-plugin-babel'));
+
+var commands = {
+  ['--help']: 'output of all commands and their functionality',
+  ['--config-file']: 'configuration file path, default option "build-scripts.conf.js"',
+  ['--watch-dir']: 'starts tracking files in inputDirectory to restart the build'
+};
+
+const debounce = (func, ms) => {
+  let timer = null;
+  return (...args) => {
+    function on() {
+      func.apply(this, args);
+      timer = null;
+    }
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(on, ms);
+  };
+};
+
+function inputOptions ({
+  inputFile,
+  outputDir
+}) {
+  return {
+    input: inputFile,
+    external: id => /^(@babel|@regimentor)/g.test(id),
+    plugins: [babel({
+      runtimeHelpers: true,
+      babelrc: false,
+      presets: ['@babel/preset-react', ['@babel/preset-env', {
+        modules: false
+      }]],
+      plugins: ['@babel/plugin-external-helpers', '@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread', ['@babel/plugin-transform-runtime', {
+        helpers: true,
+        regenerator: true
+      }]]
+    })]
+  };
+}
+
+async function build({
+  inputFile,
+  outputDir
+}) {
+  console.log('Config load params:');
+  console.table({
+    inputFile,
+    outputDir
+  });
+  const inputOpt = inputOptions({
+    inputFile,
+    outputDir
+  });
+  const bundle = await rollup.rollup(inputOpt);
+  console.log('External imports:');
+  console.table(bundle.imports);
+  const options = {
+    sourcemap: true,
+    format: 'cjs',
+    file: path.join(outputDir, 'bundle.js')
+  };
+  await bundle.generate(options);
+  await bundle.write(options);
+}
+
+function run() {
+  const argv = minimist(process.argv.slice(2));
+
+  if (argv['help']) {
+    console.table(commands);
+  }
+
+  const watchDirectory = argv['watch-dir'] ? path.join(process.cwd(), argv['watch-dir']) : path.join(process.cwd(), 'src');
+  const configFile = argv['config-file'] ? path.join(process.cwd(), argv['config-file']) : path.join(process.cwd(), 'build-scripts.conf.js');
+  let config = {
+    inputFile: path.join(process.cwd(), 'src', 'index.js'),
+    outputDir: path.join(process.cwd(), 'dist')
+  };
+
+  if (fs.existsSync(configFile)) {
+    const c = require(configFile);
+
+    config = { ...config,
+      ...c
+    };
+  }
+
+  if (argv['watch-dir']) {
+    if (fs.existsSync(watchDirectory)) {
+      fs.watch(watchDirectory, {
+        encoding: 'utf8'
+      }, (event, filename) => {
+        console.clear();
+        console.log(`Change file ${filename}, restart build`);
+        debounce(build(config), 3000);
+      });
+    } else throw new Error('Watch directory not exists');
+  } else {
+    build(config);
+  }
+}
+
+run();
