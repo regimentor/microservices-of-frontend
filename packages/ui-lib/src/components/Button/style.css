@@ -1,0 +1,13 @@
+.uiLib__button {
+  padding: 10px;
+}
+
+.uiLib__button .uiLib__button_default {
+  color: dimgray;
+}
+.uiLib__button .uiLib__button_red {
+  color: red;
+}
+.uiLib__button .uiLib__button_green {
+  color: green;
+}

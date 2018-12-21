@@ -1,16 +1,16 @@
 {
   "name": "@regimentor/mof-build-scripts",
-  "version": "0.0.0",
+  "version": "0.1.3",
   "description": "> TODO: description",
   "author": "regimentor <regimentor@yandex.ru>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/build-scripts.js",
+  "main": "bin/build-scripts",
   "directories": {
-    "test": "__tests__"
+    "bin": "bin"
   },
   "files": [
-    "lib"
+    "bin"
   ],
   "scripts": {
     "test:watch_directory": "bin/build-scripts --watch-dir=__tests__/src --config-file=__tests__/build.config.js",
@@ -27,7 +27,8 @@
     "@babel/preset-react": "^7.0.0",
     "minimist": "^1.2.0",
     "rollup": "^0.67.4",
-    "rollup-plugin-babel": "^4.0.3"
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-postcss": "^1.6.3"
   },
   "devDependencies": {
     "rollup-plugin-cli": "^0.1.5",

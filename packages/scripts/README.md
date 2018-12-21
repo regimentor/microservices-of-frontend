@@ -1,11 +1,11 @@
-# `build-scripts`
+# `@regimentor/build-scripts`
 
-> TODO: description
+> description
 
 ## Usage
 
 ```
-const buildScripts = require('build-scripts');
 
-// TODO: DEMONSTRATE API
+$ npm install @regimentor/build-scripts
+
 ```

@@ -8,6 +8,7 @@ var minimist = _interopDefault(require('minimist'));
 var path = _interopDefault(require('path'));
 var rollup = _interopDefault(require('rollup'));
 var babel = _interopDefault(require('rollup-plugin-babel'));
+var postcss = _interopDefault(require('rollup-plugin-postcss'));
 
 var commands = {
   ['--help']: 'output of all commands and their functionality',
@@ -38,7 +39,10 @@ function inputOptions ({
   return {
     input: inputFile,
     external: id => /^(@babel|@regimentor)/g.test(id),
-    plugins: [babel({
+    plugins: [postcss({
+      modules: true,
+      extract: true
+    }), babel({
       runtimeHelpers: true,
       babelrc: false,
       presets: ['@babel/preset-react', ['@babel/preset-env', {
