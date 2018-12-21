@@ -33,5 +33,6 @@
   "devDependencies": {
     "rollup-plugin-cli": "^0.1.5",
     "rollup-plugin-node-resolve": "^4.0.0"
-  }
+  },
+  "gitHead": "7a382721f29d7217cb818e815c57e3d628a70789"
 }
