@@ -4,7 +4,7 @@ import p from 'prop-types';
 
 import './style.css';
 
-const Button = ({ theme, extraClass, children }) => {
+const Button = ({ theme, extraClass, children, type }) => {
   const cRoot = c('uiLib__button', `uiLib__button_${theme}`, ...extraClass);
 
   return (
@@ -23,7 +23,8 @@ Button.propTypes = {
 Button.defaultProps = {
   theme: 'default',
   type: 'button',
-  children: null
+  children: null,
+  extraClass: []
 };
 
 export default Button;
