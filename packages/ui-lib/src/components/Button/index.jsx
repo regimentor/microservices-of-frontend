@@ -14,13 +14,13 @@ const Button = ({ theme, extraClass, children }) => {
   );
 };
 
-button.propTypes = {
+Button.propTypes = {
   theme: p.oneOf(['default', 'red', 'green']),
   type: p.oneOf(['button', 'reset', 'submit']),
   children: p.element
 };
 
-button.defaultProps = {
+Button.defaultProps = {
   theme: 'default',
   type: 'button',
   children: null
