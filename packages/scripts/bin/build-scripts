@@ -40,7 +40,6 @@ function inputOptions ({
     input: inputFile,
     external: id => /^(@babel|@regimentor)/g.test(id),
     plugins: [postcss({
-      modules: true,
       extract: true
     }), babel({
       runtimeHelpers: true,

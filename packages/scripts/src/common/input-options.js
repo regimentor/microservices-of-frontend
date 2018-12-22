@@ -7,7 +7,6 @@ export default function({ inputFile, outputDir }) {
     external: id => /^(@babel|@regimentor)/g.test(id),
     plugins: [
       postcss({
-        modules: true,
         extract: true
       }),
       babel({
