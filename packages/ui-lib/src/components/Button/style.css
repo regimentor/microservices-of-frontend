@@ -2,12 +2,12 @@
   padding: 10px;
 }
 
-.uiLib__button .uiLib__button_default {
+.uiLib__button.uiLib__button_default {
   color: dimgray;
 }
-.uiLib__button .uiLib__button_red {
+.uiLib__button.uiLib__button_red {
   color: red;
 }
-.uiLib__button .uiLib__button_green {
+.uiLib__button.uiLib__button_green {
   color: green;
 }
