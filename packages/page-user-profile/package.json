@@ -1,6 +1,6 @@
 {
   "name": "@regimentor/mof-page-user-profile",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "keywords": [],
   "author": "regimentor <regimentor@yandex.ru>",
@@ -26,11 +26,11 @@
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "@storybook/react": "^4.1.3",
+    "@babel/core": "^7.2.2",
     "@storybook/addon-actions": "^4.1.3",
     "@storybook/addon-links": "^4.1.3",
     "@storybook/addons": "^4.1.3",
-    "@babel/core": "^7.2.2",
+    "@storybook/react": "^4.1.3",
     "babel-loader": "^8.0.4"
   }
 }
